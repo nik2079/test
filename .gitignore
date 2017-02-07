@@ -1,5 +1,6 @@
 /system/cache/
 /system/log/
+/system/logs/
 /system/cache/*
 /image/cache/
 /image/cache/*
