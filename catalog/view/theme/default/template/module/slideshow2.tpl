@@ -12,5 +12,10 @@
 <script type="text/javascript"><!--
 $(document).ready(function() {
 	$('#slideshow2<?php echo $module; ?>').nivoSlider();
+	
+	
+	$('#container').prepend($('.slideshow2'));
+	$('.slideshow2').css({'display':'block'})
 });
 --></script>
+

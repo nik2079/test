@@ -131,7 +131,7 @@ function addModule() {
 	html += '      <option value="<?php echo $banner['banner_id']; ?>"><?php echo addslashes($banner['name']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
-	html += '<td><select name="slideshow2_module[<?php echo $module_row; ?>][store_id]" ><option value="0" <? ((int)$module['store_id'] == 0)? 'selected':'' ?>><?php echo $text_default; ?></option><?php foreach ($stores as $store) {  ?><option value="<?=$store['store_id']?>" <?= ((int)$module['store_id'] == (int)$store['store_id'])? 'selected':'' ?>>     <?php echo $store['name']; ?></option><?php } ?></select></td>';
+	html += '<td><select name="slideshow2_module[<?php echo $module_row; ?>][store_id]" ><option value="0"><?php echo $text_default; ?></option><?php foreach ($stores as $store) {  ?><option value="<?=$store['store_id']?>" >     <?php echo $store['name']; ?></option><?php } ?></select></td>';
 	
 	html += '    <td class="left"><input type="text" name="slideshow2_module[' + module_row + '][width]" value="" size="3" /> <input type="text" name="slideshow2_module[' + module_row + '][height]" value="" size="3" /></td>';
 	html += '    <td class="left"><select name="slideshow2_module[' + module_row + '][layout_id]">';
