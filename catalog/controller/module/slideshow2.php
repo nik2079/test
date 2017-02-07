@@ -1,6 +1,9 @@
 <?php  
 class ControllerModuleSlideshow2 extends Controller {
 	protected function index($setting) {
+		echo "<pre>";
+			print_r($setting);
+		echo "</pre>";
 		static $module = 0;
 		
 		$this->load->model('design/banner');

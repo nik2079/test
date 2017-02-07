@@ -19,6 +19,7 @@
           <thead>
             <tr>
               <td class="left"><?php echo $entry_banner; ?></td>
+              <td class="left"><?php echo $entry_shop; ?></td>
               <td class="left"><?php echo $entry_dimension; ?></td>
               <td class="left"><?php echo $entry_layout; ?></td>
               <td class="left"><?php echo $entry_position; ?></td>
@@ -40,6 +41,23 @@
                   <?php } ?>
                   <?php } ?>
                 </select></td>
+				
+				 
+				  <td>
+
+				<select name="slideshow2_module[<?php echo $module_row; ?>][store_id]" >
+					<option value="0" <? ((int)$module['store_id'] == 0)? 'selected':'' ?>><?php echo $text_default; ?></option>
+				  <?php foreach ($stores as $store) {  ?>
+						<option value="<?=$store['store_id']?>" <?= ((int)$module['store_id'] == (int)$store['store_id'])? 'selected':'' ?>>     <?php echo $store['name']; ?></option>
+                  <?php } ?>
+				  </select>
+				
+				 
+				 
+				 
+				 </td>
+				
+				
               <td class="left"><input type="text" name="slideshow2_module[<?php echo $module_row; ?>][width]" value="<?php echo $module['width']; ?>" size="3" />
                 <input type="text" name="slideshow2_module[<?php echo $module_row; ?>][height]" value="<?php echo $module['height']; ?>" size="3"/>
                 <?php if (isset($error_dimension[$module_row])) { ?>
@@ -113,6 +131,8 @@ function addModule() {
 	html += '      <option value="<?php echo $banner['banner_id']; ?>"><?php echo addslashes($banner['name']); ?></option>';
 	<?php } ?>
 	html += '    </select></td>';
+	html += '<td><select name="slideshow2_module[<?php echo $module_row; ?>][store_id]" ><option value="0" <? ((int)$module['store_id'] == 0)? 'selected':'' ?>><?php echo $text_default; ?></option><?php foreach ($stores as $store) {  ?><option value="<?=$store['store_id']?>" <?= ((int)$module['store_id'] == (int)$store['store_id'])? 'selected':'' ?>>     <?php echo $store['name']; ?></option><?php } ?></select></td>';
+	
 	html += '    <td class="left"><input type="text" name="slideshow2_module[' + module_row + '][width]" value="" size="3" /> <input type="text" name="slideshow2_module[' + module_row + '][height]" value="" size="3" /></td>';
 	html += '    <td class="left"><select name="slideshow2_module[' + module_row + '][layout_id]">';
 	<?php foreach ($layouts as $layout) { ?>

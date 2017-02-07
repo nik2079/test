@@ -3,18 +3,33 @@ class ControllerModuleSlideshow2 extends Controller {
 	private $error = array(); 
 
 	public function index() {   
+	
 		$this->language->load('module/slideshow2');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/setting');
+		$this->load->model('setting/store');
+		
 
+		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('slideshow2', $this->request->post);		
+	
+			
+			if(isset($this->request->post['store_id'])){
+				foreach($this->request->post['store_id'] as $item){
+					$this->model_setting_setting->editSetting('slideshow2', $this->request->post, $item);	
+				}
+			}else{
+				$this->model_setting_setting->editSetting('slideshow2', $this->request->post);
+			}
+			
+			
+	
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
+			//$this->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
 		}
 
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -25,8 +40,10 @@ class ControllerModuleSlideshow2 extends Controller {
 		$this->data['text_content_bottom'] = $this->language->get('text_content_bottom');		
 		$this->data['text_column_left'] = $this->language->get('text_column_left');
 		$this->data['text_column_right'] = $this->language->get('text_column_right');
-
+		$this->data['text_default'] = $this->language->get('text_default');
+		
 		$this->data['entry_banner'] = $this->language->get('entry_banner');
+		$this->data['entry_shop'] = $this->language->get('entry_shop');
 		$this->data['entry_dimension'] = $this->language->get('entry_dimension'); 
 		$this->data['entry_layout'] = $this->language->get('entry_layout');
 		$this->data['entry_position'] = $this->language->get('entry_position');
@@ -75,7 +92,16 @@ class ControllerModuleSlideshow2 extends Controller {
 		$this->data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 
 		$this->data['modules'] = array();
-
+		
+		
+		$this->data['stores'] = $this->model_setting_store->getStores();
+		
+		
+	
+		
+	
+		$this->data['product_store'] = array(0);
+		
 		if (isset($this->request->post['slideshow2_module'])) {
 			$this->data['modules'] = $this->request->post['slideshow2_module'];
 		} elseif ($this->config->get('slideshow2_module')) { 
