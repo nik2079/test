@@ -1,3 +1,5 @@
 /system/cache/
 /system/cache/*
+/image/cache/
+/image/cache/*
 .idea
