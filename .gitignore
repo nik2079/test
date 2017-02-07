@@ -1,2 +1,3 @@
-system/cache/*
+/system/cache/
+/system/cache/*
 .idea
